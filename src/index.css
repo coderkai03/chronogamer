@@ -70,22 +70,22 @@
   cursor: pointer;
 }
 
-/* create new blog form */
-.create {
+/* add new picture form */
+.add-form {
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
-.create label {
+.add-form label {
   text-align: left;
   display: block;
 }
-.create h2 {
+.add-form h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 30px;
 }
-.create input, .create textarea, .create select {
+.add-form input, .add-form textarea, .add-form select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -93,7 +93,7 @@
   box-sizing: border-box;
   display: block;
 }
-.create button {
+.add-form button {
   background: #f1356d;
   color: #fff;
   border: 0;
