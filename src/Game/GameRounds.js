@@ -9,15 +9,20 @@ const GameRounds = () => {
     const {data: games, isLoading, Error} = useFetch("http://localhost:8000/games")
     const history = useHistory()
 
+    // console.log("Selected rounds:", numRounds)
+    // console.log("Games: ", games)
+
     const handleSubmit = (e) => {
-        e.preventDefault();
         console.log("Selected rounds:", numRounds)
         console.log("Games: ", games)
+        e.preventDefault();
         history.push({
             pathname: '/home/play',
             state: {
                 numRounds: numRounds,
-                games: games
+                games: games,
+                loading: isLoading,
+                error: Error
             }
         });
       }
