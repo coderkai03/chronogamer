@@ -6,7 +6,8 @@ const Navbar = () => {
             <h1>Chronogamer++</h1>
             <div className="links">
                 <Link to='/'>Play</Link>
-                <Link to='/add-pix' onClick={ (event) => event.preventDefault() }>Add Pix</Link>
+                <Link to='/add-games' >Add Games</Link>
+                {/* onClick={ (event) => event.preventDefault() }  */}
             </div>
         </nav>
     );

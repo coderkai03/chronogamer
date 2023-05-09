@@ -26,8 +26,8 @@ const Play = () => {
 
     return (
         <div>
-            {/* {error && <div>{error}</div>} */}
-            {/* {loading && <div>Loading...</div>} */}
+            {/* {Error && <div>{Error}</div>} */}
+            {/* {isLoading && <div>Loading...</div>} */}
             <h1>Play game: {rounds} rounds</h1>
             {randoGames && randoGames.map((game) => (
                 <div key={game.id}>
