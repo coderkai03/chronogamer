@@ -1,25 +1,39 @@
 import { useState } from "react";
-import { withRouter } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
-const Play = ({numRounds, games, loading, error}) => {
-    const [rounds, setRounds] = useState(numRounds)
+const Play = () => {
+    const location = useLocation()
+    const [rounds, setRounds] = useState(location.state.numRounds)
+    const gameList = location.state.games
+    const isLoad = location.state.isLoading
     // const {title, url, year} = useState(null)
 
-    console.log('location state:', games);
+    // console.log("ROUNDS: ", gameList)
 
-    if (!games) {
-        return <div>No games found.</div>;
+    // Randomize order of games array
+    const compareRandom = () => Math.random() - 0.5;
+    const randoGames = gameList.sort(compareRandom)
+
+    console.log('location state:', gameList);
+
+    const gradeRound = (ID) => {
+        randoGames.splice(ID, 1)
     }
+
+    // if (!games) {
+    //     return <div>No games found.</div>;
+    // }
 
     return (
         <div>
-            {error && <div>{error}</div>}
-            {loading && <div>Loading...</div>}
+            {/* {error && <div>{error}</div>} */}
+            {/* {loading && <div>Loading...</div>} */}
             <h1>Play game: {rounds} rounds</h1>
-            {games && games.map((game) => (
-                <div>
+            {randoGames && randoGames.map((game) => (
+                <div key={game.id}>
                     <h2>{game.title}</h2>
-                    <img src={game.url} />
+                    <img src={game.url}></img>
+                    <p>{game.url}</p>
                     <label>{game.year}</label>
                 </div>
             ))}
@@ -27,4 +41,4 @@ const Play = ({numRounds, games, loading, error}) => {
     );
 }
  
-export default withRouter(Play);
+export default Play;

@@ -1,30 +1,32 @@
 import { useState } from 'react';
 import useFetch from '../useFetch';
 import {useHistory} from 'react-router-dom'
+// import Play from './Play';
 
 
 const GameRounds = () => {
-    const [numRounds, setNumRounds] = useState(1)
+    const [rounds, setRounds] = useState(1)
 
     const {data: games, isLoading, Error} = useFetch("http://localhost:8000/games")
     const history = useHistory()
 
-    // console.log("Selected rounds:", numRounds)
+    // console.log("Selected rounds:", rounds)
     // console.log("Games: ", games)
 
     const handleSubmit = (e) => {
-        console.log("Selected rounds:", numRounds)
+        console.log("Selected rounds:", rounds)
         console.log("Games: ", games)
         e.preventDefault();
         history.push({
             pathname: '/home/play',
             state: {
-                numRounds: numRounds,
+                numRounds: rounds,
                 games: games,
                 loading: isLoading,
                 error: Error
             }
         });
+        console.log('History: ', history)
       }
 
     return (
@@ -32,17 +34,24 @@ const GameRounds = () => {
             <h1>How many rounds?</h1>
             <form onSubmit={handleSubmit}>
                 {/* add hints? */}
-                <label>{numRounds} rounds</label>
+                <label>{rounds} rounds</label>
                 <input
                 type="range"
                 min='1'
                 max='5'
                 required
-                value={numRounds}
-                onChange={(e) => setNumRounds(e.target.value)}
+                value={rounds}
+                onChange={(e) => setRounds(e.target.value)}
                 />
                 <button>Start game</button>
             </form>
+            {games && games.map((game) => (
+                <div key={game.id}>
+                    <h2>{game.title}</h2>
+                    <img src={game.url} />
+                    <label>{game.year}</label>
+                </div>
+            ))}
         </div>
     );
 }
