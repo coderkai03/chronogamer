@@ -23,7 +23,9 @@ const useFetch = (url) => {
                     setError(null)
                 })
                 .catch(err => {
+                    
                     if (err.name === 'AbortError') {
+                        console.log('access failed: ',url)
                         console.log('fetch aborted')
                     }
                     else {

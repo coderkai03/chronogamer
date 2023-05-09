@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { withRouter } from 'react-router-dom';
+import useFetch from "../useFetch";
 
-const Play = ({numRounds, games, loading, error}) => {
+const Play = (numRounds) => {
+    const {data: games, isLoading, Error} = useFetch("http://localhost:8000/games")
     const [rounds, setRounds] = useState(numRounds)
-    // const {title, url, year} = useState(null)
+
+    // Randomize order of games array
+    const compareRandom = () => Math.random() - 0.5;
+    const randoGames = games.sort(compareRandom)
 
     console.log('location state:', games);
 
@@ -13,11 +18,11 @@ const Play = ({numRounds, games, loading, error}) => {
 
     return (
         <div>
-            {error && <div>{error}</div>}
-            {loading && <div>Loading...</div>}
+            {Error && <div>{Error}</div>}
+            {isLoading && <div>Loading...</div>}
             <h1>Play game: {rounds} rounds</h1>
-            {games && games.map((game) => (
-                <div>
+            {randoGames && randoGames.map((game) => (
+                <div key={game.id}>
                     <h2>{game.title}</h2>
                     <img src={game.url} />
                     <label>{game.year}</label>
