@@ -9,13 +9,14 @@ const Play = () => {
     // const {title, url, year} = useState(null)
 
     // console.log("ROUNDS: ", gameList)
+    console.log('location state:', gameList);
+
 
     // Randomize order of games array
     const compareRandom = () => Math.random() - 0.5;
     const randoGames = gameList.sort(compareRandom)
 
-    console.log('location state:', gameList);
-
+    
     const gradeRound = (ID) => {
         randoGames.splice(ID, 1)
     }
