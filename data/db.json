@@ -2,43 +2,43 @@
   "games": [
       {
           "title": "The Legend of Zelda: Breath of the Wild",
-          "url": "game-pics/botw.jpg",
+          "url": "/game-pics/botw.jpg",
           "year": 2017,
           "id": 1
       },
       {
-          "title": "The Legend of zelda: Tears of the Kingdom",
-          "url": "game-pics/totk.jpeg",
+          "title": "The Legend of Zelda: Tears of the Kingdom",
+          "url": "/game-pics/totk.jpeg",
           "year": 2023,
           "id": 2
       },
       {
           "title": "Batman: Arkham Knight",
-          "url": "game-pics/arkham-knight.jpg",
+          "url": "/game-pics/arkham-knight.jpg",
           "year": 2015,
           "id": 3
       },
       {
           "title": "Minecraft",
-          "url": "game-pics/minecraft.jpg",
+          "url": "/game-pics/minecraft.jpg",
           "year": 2011,
           "id": 4
       },
       {
           "title": "Super Smash Bros: Ultimate",
-          "url": "game-pics/ssbu.jpg",
+          "url": "/game-pics/ssbu.jpg",
           "year": 2018,
           "id": 5
       },
       {
         "title": "Spider-Man",
-        "url": "game-pics/spiderman.jpg",
+        "url": "/game-pics/spiderman.jpg",
         "year": 2018,
         "id": 6
     },
     {
         "title": "Spider-Man: Miles Morales",
-        "url": "game-pics/miles-morales.jpg",
+        "url": "/game-pics/miles-morales.jpg",
         "year": 2020,
         "id": 7
     }

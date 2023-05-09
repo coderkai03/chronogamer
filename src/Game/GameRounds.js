@@ -6,7 +6,7 @@ import {useHistory} from 'react-router-dom'
 
 const GameRounds = () => {
     const [rounds, setRounds] = useState(1)
-
+    const {data: games, isLoading, Error} = useFetch('http://localhost:8000/games')
     
     const history = useHistory()
 
