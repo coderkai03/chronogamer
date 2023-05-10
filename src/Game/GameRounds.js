@@ -45,13 +45,13 @@ const GameRounds = () => {
                 />
                 <button>Start game</button>
             </form>
-            {games && games.map((game) => (
+            {/* {games && games.map((game) => (
                 <div key={game.id}>
                     <h2>{game.title}</h2>
                     <img src={game.url} />
                     <label>{game.year}</label>
                 </div>
-            ))}
+            ))} */}
         </div>
     );
 }
