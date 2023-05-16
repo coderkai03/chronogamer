@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useFetch from '../useFetch';
 import {useHistory} from 'react-router-dom'
 // import Play from './Play';
@@ -7,6 +7,7 @@ import {useHistory} from 'react-router-dom'
 const GameRounds = () => {
     const [rounds, setRounds] = useState(1)
     const {data: games, isLoading, Error} = useFetch('http://localhost:8000/games')
+    console.log("ALL GAMES: ", games)
     
     const history = useHistory()
 
