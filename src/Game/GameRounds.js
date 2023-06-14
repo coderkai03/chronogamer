@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useFetch from '../useFetch';
+import useFetch from './useFetch';
 import {useHistory} from 'react-router-dom'
 // import Play from './Play';
 

@@ -1,0 +1,22 @@
+{
+    "profiles": [
+        {
+            "id": 1,
+            "name": "coderkai03",
+            "games_won": 4,
+            "accuracy": 76
+        },
+        {
+            "id": 2,
+            "name": "skeeball",
+            "games_won": 3,
+            "accuracy": 83
+        },
+        {
+            "id": 3,
+            "name": "deeznuts69",
+            "games_won": 8,
+            "accuracy": 47
+        }
+    ]
+}
