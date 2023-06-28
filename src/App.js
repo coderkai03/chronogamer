@@ -4,6 +4,7 @@ import GameRounds from './Game/GameRounds'
 import Play from './Game/Play'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AddGame from './AddGames/AddGame';
+import Leaderboard from './Profiles/Leaderboard'
 
 function App() {
   return (
@@ -24,7 +25,11 @@ function App() {
             <Route exact path='/add-games'>
               {/* Check current games before adding */}
               <AddGame />
+              </Route>
+            <Route exact path='/leaderboard'>
+              <Leaderboard />
             </Route>
+            
           </Switch>
         </div>
       </div>

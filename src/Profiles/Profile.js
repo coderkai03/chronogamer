@@ -1,9 +1,11 @@
 const Profile = ({name, record, percent}) => {
+    
+
     return (
         <div>
             <h1>Gamertag: {name}</h1>
-            <h3>Victories: {record}</h3>
-            <h3>Accuracy: {percent}</h3>
+            <label>Victories: {record}</label>
+            <label>Accuracy: {percent}%</label>
         </div>
     );
 }

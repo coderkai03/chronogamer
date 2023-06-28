@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const Game = (games) => {
+const Game = (gameItem) => {
 
     useEffect(() => {
-        console.log("Displaying: ", games)
+        console.log("Displaying: ", gameItem)
     }, [])
 
     return (
         <div>
-        {games && games
-            // .filter((game, index) => index === currentRound)
-            .map((game) => (
-              <div key={game.id}>
-                <h2>{game.title}</h2>
-                <img src={game.url} width={700}></img>
-                <label>{game.year}</label>
-              </div>
-            //}
-            ))}
+            <h2>{gameItem.title}</h2>
+            <img src={gameItem.url} width={700}></img>
+            <label>{gameItem.year}</label>
         </div>
     );
 }

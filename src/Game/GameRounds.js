@@ -1,33 +1,57 @@
 import { useEffect, useState } from 'react';
-import useFetch from './useFetch';
+import useFetch from '../useFetch';
 import {useHistory} from 'react-router-dom'
-// import Play from './Play';
+import axios from 'axios'
+
+
+
+// const api = axios.create({
+//     baseURL: url
+// })
+
+// var games = await axios.get('http://localhost:8000/games')
+            // try {
+            //     var {data: games, isLoading, Error} = await useFetch('http://localhost:8000/games')
+            //     console.log("ALL GAMES: ", games)
+            // }
+            // catch (error) {
+            //     console.log(`Error: ${error}`)
 
 
 const GameRounds = () => {
     const [rounds, setRounds] = useState(1)
-    const {data: games, isLoading, Error} = useFetch('http://localhost:8000/games')
-    console.log("ALL GAMES: ", games)
-    
+    const [url, setUrl] = useState('http://localhost:8000/games')
+    const [games, setGames] = useState([])
     const history = useHistory()
 
+    useEffect(() => {
+        console.log("in useEffect")
+        async function fetchData(){
+          const res = await fetch(url)
+          return await res.json()
+        }
+        fetchData().then(data => {
+          setGames(data)
+        })
+      }, [url])
+
     // console.log("Selected rounds:", rounds)
-    // console.log("Games: ", games)
+    console.log("Games: ", games)
 
     const handleSubmit = (e) => {
-        console.log("Selected rounds:", rounds)
-        console.log("Games: ", games)
         e.preventDefault();
+        console.log('History: ', history)
+        console.log('Rounds: ', rounds)
         history.push({
             pathname: '/home/play',
             state: {
                 numRounds: rounds,
-                games: games,
-                loading: isLoading,
-                error: Error
+                games: games
+                // loading: isLoading,
+                // error: Error
             }
         });
-        console.log('History: ', history)
+        
       }
 
     return (
@@ -39,20 +63,13 @@ const GameRounds = () => {
                 <input
                 type="range"
                 min='1'
-                max='5'
+                max={games.length}
                 required
                 value={rounds}
                 onChange={(e) => setRounds(e.target.value)}
                 />
                 <button>Start game</button>
             </form>
-            {/* {games && games.map((game) => (
-                <div key={game.id}>
-                    <h2>{game.title}</h2>
-                    <img src={game.url} />
-                    <label>{game.year}</label>
-                </div>
-            ))} */}
         </div>
     );
 }
