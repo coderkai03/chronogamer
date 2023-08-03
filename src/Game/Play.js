@@ -15,34 +15,49 @@ const Play = () => {
 
   useEffect(() => {
     const shuffledGames = [...gameList];
+    //fisher yates algo randomizes games
     for (let i = shuffledGames.length - 1; i >= 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffledGames[i], shuffledGames[j]] = [shuffledGames[j], shuffledGames[i]];
     }
+
+    //set randGames and rounds
     setRandGames(shuffledGames);
     setRounds(numRounds);
     console.log("RANDOMIZED: ", shuffledGames);
   }, [numRounds, gameList]);
 
-  console.log(randGames);
+  //console.log(randGames);
+
+  // const endGame = (event) => {
+  //   event.preventDefault()
+  //   console.log('Total points: ', points)
+
+  //   history.push({
+  //     pathname: '/Results'
+  //   })
+  // }
 
   const handleNextRound = () => {
+    //add pts if guessyr == game.year
+    if (parseInt(guessYr) === parseInt(randGames[currentRound].year)) {
+      console.log("CORRECT!");
+      setPoints(points+1)
+    }
+
     setCurrentRound((prevRound) => {
-      if (prevRound < rounds - 1) {
-        if (guessYr === randGames[prevRound].year) {
-          console.log("CORRECT!");
-        }
-        return prevRound + 1;
+      if (prevRound < rounds-1) {
+        return prevRound+1
       }
-      return prevRound;
     });
-    console.log("NEXT ROUND: ", rounds);
+    console.log("NEXT ROUND: ", currentRound);
   };
 
   return (
     <div>
       <h1>Play game: {rounds} rounds</h1>
       <p>Current round: {currentRound}</p>
+      <p>Points: {points}</p>
       {randGames &&
         randGames
           .filter((game, index) => index === currentRound)
@@ -58,8 +73,8 @@ const Play = () => {
           <label>Year: {guessYr}</label>
           <input
             type="range"
-            min="2000"
-            max="2023"
+            min={2000}
+            max={2023}
             required
             value={guessYr}
             onChange={(e) => setGuessYr(e.target.value)}
