@@ -8,7 +8,7 @@ const Home = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        history.push('/home/round-select');
+        history.push('/round-select');
       }
 
     return (

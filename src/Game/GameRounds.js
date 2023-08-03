@@ -25,14 +25,12 @@ const GameRounds = () => {
     const history = useHistory()
 
     useEffect(() => {
-        console.log("in useEffect")
-        async function fetchData(){
-          const res = await fetch(url)
-          return await res.json()
+        async function fetchData() {
+            const res = await fetch(url);
+            const data = await res.json();
+            setGames(data);
         }
-        fetchData().then(data => {
-          setGames(data)
-        })
+        fetchData();
       }, [url])
 
     // console.log("Selected rounds:", rounds)
@@ -43,7 +41,7 @@ const GameRounds = () => {
         console.log('History: ', history)
         console.log('Rounds: ', rounds)
         history.push({
-            pathname: '/home/play',
+            pathname: '/play',
             state: {
                 numRounds: rounds,
                 games: games

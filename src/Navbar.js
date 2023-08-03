@@ -5,7 +5,7 @@ const Navbar = () => {
         <nav className="navbar">
             <h1>Chronogamer++</h1>
             <div className="links">
-                <Link to='/home'>Play</Link>
+                <Link to='/'>Play</Link>
                 <Link to='/add-games' >Add Games</Link>
                 <Link to='/leaderboard' >Leaderboard</Link>
                 {/* onClick={ (event) => event.preventDefault() }  */}

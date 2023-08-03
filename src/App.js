@@ -13,13 +13,13 @@ function App() {
         <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path='/home'>
+            <Route exact path='/'>
               <Home />
             </Route>
-            <Route exact path='/home/round-select'>
+            <Route exact path='/round-select'>
               <GameRounds />
             </Route>
-            <Route exact path='/home/play'>
+            <Route exact path='/play'>
               <Play />
             </Route>
             <Route exact path='/add-games'>
