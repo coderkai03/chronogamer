@@ -5,6 +5,7 @@ import Play from './Game/Play'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import AddGame from './AddGames/AddGame';
 import Leaderboard from './Profiles/Leaderboard'
+import Results from './Game/Results';
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function App() {
             <Route exact path='/leaderboard'>
               <Leaderboard />
             </Route>
-            
+            <Route exact path='/results'>
+              <Results />
+            </Route>
           </Switch>
         </div>
       </div>
