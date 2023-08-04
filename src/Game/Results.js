@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-const Results = ({rounds, points}) => {
+const Results = () => {
     const location = useLocation()
 
     const finalRounds = location.state.rounds

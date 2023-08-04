@@ -30,10 +30,9 @@ const Play = () => {
     console.log("RANDOMIZED: ", shuffledGames);
   }, [numRounds, gameList]);
 
-  //console.log(randGames);
-
-  const endGame = () => {
-    //event.preventDefault()
+  useEffect(() => {
+    if (currentRound === rounds-1) {
+      //event.preventDefault()
     console.log('Total points: ', points)
 
     history.push({
@@ -43,30 +42,21 @@ const Play = () => {
         points: points
       }
     })
-  }
+    }
+  }, [currentRound])
 
+  //console.log(randGames);
 
   const handleNextRound = (event) => {
-      handlePoints()
-      setCurrentRound((prevRound) => prevRound+1)
+    setCurrentRound((prevRound) => prevRound+1)
 
-    if (currentRound === rounds-1)
-      endGame()
+    if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
+      setPoints((pts) => pts+1)
 
     //add pts if guessyr == game.year
     // handlePoints()
     console.log("POINTS: ", points)
     console.log("NEXT ROUND: ", currentRound);
-  }
-
-  const handlePoints = () => {
-    setPoints((pts => {
-      let addPts=pts
-      if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
-        addPts+=1
-      
-      return addPts
-    }))
   }
 
   return (
