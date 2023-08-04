@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Play = () => {
   const location = useLocation();
+  const history = useHistory()
+
   const numRounds = location.state.numRounds;
   const gameList = location.state.games;
 
@@ -29,29 +32,42 @@ const Play = () => {
 
   //console.log(randGames);
 
-  // const endGame = (event) => {
-  //   event.preventDefault()
-  //   console.log('Total points: ', points)
+  const endGame = () => {
+    //event.preventDefault()
+    console.log('Total points: ', points)
 
-  //   history.push({
-  //     pathname: '/Results'
-  //   })
-  // }
-
-  const handleNextRound = () => {
-    //add pts if guessyr == game.year
-    if (parseInt(guessYr) === parseInt(randGames[currentRound].year)) {
-      console.log("CORRECT!");
-      setPoints(points+1)
-    }
-
-    setCurrentRound((prevRound) => {
-      if (prevRound < rounds-1) {
-        return prevRound+1
+    history.push({
+      pathname: '/Results',
+      state: {
+        rounds: rounds,
+        points: points
       }
-    });
+    })
+  }
+
+
+  const handleNextRound = (event) => {
+      handlePoints()
+      setCurrentRound((prevRound) => prevRound+1)
+
+    if (currentRound === rounds-1)
+      endGame()
+
+    //add pts if guessyr == game.year
+    // handlePoints()
+    console.log("POINTS: ", points)
     console.log("NEXT ROUND: ", currentRound);
-  };
+  }
+
+  const handlePoints = () => {
+    setPoints((pts => {
+      let addPts=pts
+      if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
+        addPts+=1
+      
+      return addPts
+    }))
+  }
 
   return (
     <div>
