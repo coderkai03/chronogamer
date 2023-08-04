@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -15,8 +15,12 @@ const Play = () => {
   const [currentRound, setCurrentRound] = useState(0);
   const [points, setPoints] = useState(0);
   const [guessYr, setGuessYr] = useState(2010);
+  const [gameOver, setGameOver] = useState()
+  const isInitialMount = useRef(true)
 
   useEffect(() => {
+    setGameOver(false)
+
     const shuffledGames = [...gameList];
     //fisher yates algo randomizes games
     for (let i = shuffledGames.length - 1; i >= 0; i--) {
@@ -28,30 +32,35 @@ const Play = () => {
     setRandGames(shuffledGames);
     setRounds(numRounds);
     console.log("RANDOMIZED: ", shuffledGames);
-  }, [numRounds, gameList]);
+  }, []);
 
   useEffect(() => {
-    if (currentRound === rounds-1) {
-      //event.preventDefault()
-    console.log('Total points: ', points)
-
-    history.push({
-      pathname: '/Results',
-      state: {
-        rounds: rounds,
-        points: points
-      }
-    })
+    if (isInitialMount.current) {
+      isInitialMount.current = false
     }
-  }, [currentRound])
+    else if (gameOver) {
+      console.log('Total points: ', points)
+
+      history.push({
+        pathname: '/Results',
+        state: {
+          rounds: rounds,
+          points: points
+        }
+      })
+    }
+  }, [gameOver, isInitialMount.current])
 
   //console.log(randGames);
 
-  const handleNextRound = (event) => {
+  const handleNextRound = () => {
     setCurrentRound((prevRound) => prevRound+1)
 
     if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
       setPoints((pts) => pts+1)
+
+    if (currentRound === rounds-1)
+      setGameOver(true)
 
     //add pts if guessyr == game.year
     // handlePoints()
