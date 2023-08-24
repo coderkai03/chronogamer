@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Game from './Game'
 
 const Play = () => {
   const location = useLocation();
@@ -15,8 +16,11 @@ const Play = () => {
   const [currentRound, setCurrentRound] = useState(0);
   const [points, setPoints] = useState(0);
   const [guessYr, setGuessYr] = useState(2010);
+
   const [gameOver, setGameOver] = useState()
   const isInitialMount = useRef(true)
+  const [hideElement, setHideElement] = useState(true)
+  
 
   useEffect(() => {
     setGameOver(false)
@@ -29,7 +33,7 @@ const Play = () => {
     }
 
     //set randGames and rounds
-    setRandGames(shuffledGames);
+    setRandGames(shuffledGames.splice(0, numRounds));
     setRounds(numRounds);
     console.log("RANDOMIZED: ", shuffledGames);
   }, []);
@@ -54,6 +58,8 @@ const Play = () => {
   //console.log(randGames);
 
   const handleNextRound = () => {
+    setHideElement(false)
+
     setCurrentRound((prevRound) => prevRound+1)
 
     if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
@@ -77,11 +83,18 @@ const Play = () => {
         randGames
           .filter((game, index) => index === currentRound)
           .map((game) => (
-            <div key={game.id}>
-              <h2>{game.title}</h2>
-              <img src={game.url} width={700} alt="Game"></img>
-              <label>{game.year}</label>
-            </div>
+            // <div key={game.id}>
+            //   <h2>{game.title}</h2>
+            //   <img src={game.url} width={700} alt="Game"></img>
+            //   {!hideElement && <label>{game.year}</label>}
+            // </div>
+            <Game 
+              id={game.id}
+              title={game.title}
+              url={game.url}
+              year={game.year}
+              hideElement={hideElement}
+            />
           ))}
       <div className="add-form">
         <form>
@@ -94,7 +107,7 @@ const Play = () => {
             value={guessYr}
             onChange={(e) => setGuessYr(e.target.value)}
           />
-          <button type="button" onClick={handleNextRound}>Next Round</button>
+          {hideElement && <button type="button" onClick={handleNextRound}>Next Round</button>}
         </form>
       </div>
     </div>
