@@ -25,16 +25,18 @@ const GameRounds = () => {
     const history = useHistory()
 
     useEffect(() => {
-        async function fetchData() {
-            const res = await fetch(url);
-            const data = await res.json();
-            setGames(data);
+        console.log("in useEffect")
+        async function fetchData(){
+          const res = await fetch(url)
+          return await res.json()
         }
-        fetchData();
+        fetchData().then(data => {
+          setGames(data)
+        })
       }, [url])
 
     // console.log("Selected rounds:", rounds)
-    console.log("Games: ", games)
+    //console.log("Games: ", games)
 
     const handleSubmit = (e) => {
         e.preventDefault();
