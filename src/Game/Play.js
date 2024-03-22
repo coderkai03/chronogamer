@@ -20,6 +20,8 @@ const Play = () => {
   const [gameOver, setGameOver] = useState()
   const isInitialMount = useRef(true)
   const [hideElement, setHideElement] = useState(true)
+
+  const [submitLabel, setSubmitLabel] = useState('Submit')
   
 
   useEffect(() => {
@@ -68,6 +70,8 @@ const Play = () => {
     if (currentRound === rounds-1)
       setGameOver(true)
 
+    setSubmitLabel(() => hideElement ? 'Submit' : 'Next')
+
     //add pts if guessyr == game.year
     // handlePoints()
     console.log("POINTS: ", points)
@@ -107,7 +111,8 @@ const Play = () => {
             value={guessYr}
             onChange={(e) => setGuessYr(e.target.value)}
           />
-          {hideElement && <button type="button" onClick={handleNextRound}>Next Round</button>}
+          <button type="button" onClick={handleNextRound}>{submitLabel}</button>
+          {/* Submit -> Next */}
         </form>
       </div>
     </div>
