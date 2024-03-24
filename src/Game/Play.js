@@ -79,10 +79,8 @@ const Play = () => {
   }
 
   return (
-    <div>
-      <h1>Play game: {rounds} rounds</h1>
-      <p>Current round: {currentRound}</p>
-      <p>Points: {points}</p>
+    <div className="content-div">
+      <h2>Round {currentRound+1}</h2>
       {randGames &&
         randGames
           .filter((game, index) => index === currentRound)
@@ -100,7 +98,7 @@ const Play = () => {
               hideElement={hideElement}
             />
           ))}
-      <div className="add-form">
+      <div>
         <form>
           <label>Year: {guessYr}</label>
           <input

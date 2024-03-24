@@ -9,9 +9,9 @@ const Game = (prop) => {
 
     return (
         <div key={prop.id}>
-            <h2>{prop.title}</h2>
+            {/* <h2>{prop.title}</h2> */}
             <img src={prop.url} width={700} alt="Game"></img>
-            {!prop.hideElement && <label>{prop.year}</label>}
+            {/* {!prop.hideElement && <label>{prop.year}</label>} */}
         </div>
     );
 }

@@ -13,15 +13,17 @@ const Home = () => {
 
     return (
         <div className="home">
-            <div className="add-form">
-                <h3>LOG IN</h3>
-                <form>
-                    <label for="uname">Username</label>
-                    <input type="text" id="uname" name="uname"/>
-                    <label for="password">Password</label>
-                    <input type="text" id="password" name="password"/>
-                    <button onClick={handleSubmit}>LOG IN</button>
-                </form>
+            <div className="content-div">
+                <div>
+                    <h3>LOG IN</h3>
+                    <form>
+                        <label for="uname">Username</label>
+                        <input type="text" id="uname" name="uname"/>
+                        <label for="password">Password</label>
+                        <input type="text" id="password" name="password"/>
+                        <button onClick={handleSubmit}>LOG IN</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

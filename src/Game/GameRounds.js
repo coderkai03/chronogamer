@@ -55,21 +55,23 @@ const GameRounds = () => {
       }
 
     return (
-        <div className='add-form'>
-            <h1>How many rounds?</h1>
-            <form onSubmit={handleSubmit}>
-                {/* add hints? */}
-                <label>{rounds} rounds</label>
-                <input
-                type="range"
-                min='1'
-                max={games.length}
-                required
-                value={rounds}
-                onChange={(e) => setRounds(e.target.value)}
-                />
-                <button>Start game</button>
-            </form>
+        <div className='content-div'>
+            <h2>Select rounds</h2>
+            <div className='round-range'>
+              <form onSubmit={handleSubmit}>
+                  {/* add hints? */}
+                  <label style={{ textAlign: 'center', margin: '20px'}}>Rounds: {rounds}</label>
+                  <input
+                  type="range"
+                  min='1'
+                  max={games.length}
+                  required
+                  value={rounds}
+                  onChange={(e) => setRounds(e.target.value)}
+                  />
+                  <button>Start game</button>
+              </form>
+            </div>
         </div>
     );
 }
