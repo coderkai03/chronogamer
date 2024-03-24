@@ -13,9 +13,15 @@ const Home = () => {
 
     return (
         <div className="home">
-            <div>
-                <h1>Play Chronogamer</h1>
-                <button onClick={handleSubmit}>Let's go!</button>
+            <div className="add-form">
+                <h3>LOG IN</h3>
+                <form>
+                    <label for="uname">Username</label>
+                    <input type="text" id="uname" name="uname"/>
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password"/>
+                    <button onClick={handleSubmit}>LOG IN</button>
+                </form>
             </div>
         </div>
     );

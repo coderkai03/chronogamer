@@ -20,7 +20,7 @@ import axios from 'axios'
 
 const GameRounds = () => {
     const [rounds, setRounds] = useState(1)
-    const [url, setUrl] = useState('http://localhost:8080/games')
+    const [url, setUrl] = useState('http://localhost:8000/games')
     const [games, setGames] = useState([])
     const history = useHistory()
 
