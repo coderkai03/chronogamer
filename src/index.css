@@ -1,11 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
 
 /* base styles */
-* {
+body {
   margin: 0;
-  font-family: "Quicksand";
-  color: #333;
+  font-family: "Roboto";
+  color: #fff;
+  background-color: #638fd1;
 }
+
+label {
+  margin-bottom: 10px;
+}
+
+img {
+  width: 100%;
+}
+
+input[type="range"] {
+  -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+  width: 100%; /* Set width to fill its container */
+  background: #000; /* Set background color of the track */
+  outline: none; /* Remove default outline */
+  position: relative; /* Position relative for absolute positioning of pseudo-elements */
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* Style the thumb (slider handle) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+  width: 20px; /* Set width of the thumb */
+  height: 20px; /* Set height of the thumb */
+  background: #638fd1; /* Set background color of the thumb */
+  border-radius: 50%; /* Make it circular */
+  cursor: pointer; /* Change cursor on hover */
+  margin-top: -9px;
+}
+
+/* Style the progress bar */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px; /* Set height of the track */
+}
+
+.round-range {
+  display: flex;
+  flex-direction: column;
+}
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -15,7 +56,7 @@
   border-bottom: 1px solid #f2f2f2;
 }
 .navbar h1 {
-  color: #f1356d;
+  color: #fff;
 }
 .navbar .links {
   margin-left: auto;
@@ -24,9 +65,10 @@
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
+  color: #fff;
 }
 .navbar a:hover {
-  color: #f1356d;
+  color: #ed5684;
 }
 .content {
   max-width: 600px;
@@ -71,33 +113,56 @@
 }
 
 /* add new picture form */
-.add-form {
-  max-width: 400px;
+.content-div {
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
+  margin-bottom: 10px; /* Add margin to separate elements */
+  display: flex; /* Change display to flex */
+  flex-direction: column; /* Set flex-direction to column */
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+  padding: 30px 50px;
 }
-.add-form label {
+.content-div label {
   text-align: left;
   display: block;
+  padding-top: 20px;
+  color: rgba(0,0,0,0.5);
 }
-.add-form h2 {
+.content-div h2 {
   font-size: 20px;
-  color: #f1356d;
+  font-weight: 500;
   margin-bottom: 30px;
 }
-.add-form input, .add-form textarea, .add-form select {
+
+.content-div h3 {
+  text-align: left;
+  font-weight: 200px;
+  font-size: 15px;
+}
+
+.content-div input, .content-div textarea, .content-div select {
   width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #000;
   box-sizing: border-box;
   display: block;
+  color: #000;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 3px;
+  padding: 2px;
 }
-.add-form button {
-  background: #f1356d;
+.content-div button {
+  background: #ed5684;
   color: #fff;
   border: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  margin: 20px 0px;
+  width: 100%;
 }
