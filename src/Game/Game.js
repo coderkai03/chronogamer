@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const Game = (gameItem) => {
+const Game = (prop) => {
 
     useEffect(() => {
-        console.log("Displaying: ", gameItem)
+        console.log("Displaying: ", prop)
     }, [])
 
     return (
-        <div>
-            <h2>{gameItem.title}</h2>
-            <img src={gameItem.url} width={700}></img>
-            <label>{gameItem.year}</label>
+        <div key={prop.id}>
+            <h2>{prop.title}</h2>
+            <img src={prop.url} width={700} alt="Game"></img>
+            {!prop.hideElement && <label>{prop.year}</label>}
         </div>
     );
 }
