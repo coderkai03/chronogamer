@@ -22,6 +22,9 @@ const Play = () => {
   const [hideElement, setHideElement] = useState(true)
 
   const [submitLabel, setSubmitLabel] = useState('Submit')
+
+  //array of guesses
+  const [guesses, setGuesses] = useState([])
   
 
   useEffect(() => {
@@ -51,7 +54,9 @@ const Play = () => {
         pathname: '/Results',
         state: {
           rounds: rounds,
-          points: points
+          points: points,
+          randGames: randGames,
+          guesses: guesses
         }
       })
     }
@@ -69,6 +74,9 @@ const Play = () => {
 
     if (currentRound === rounds-1)
       setGameOver(true)
+
+    const newGuesses = [...guesses, guessYr]
+    setGuesses(newGuesses)
 
     setSubmitLabel(() => hideElement ? 'Submit' : 'Next')
 
