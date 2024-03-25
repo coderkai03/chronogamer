@@ -22,6 +22,10 @@ const Play = () => {
   const [hideElement, setHideElement] = useState(true)
 
   const [submitLabel, setSubmitLabel] = useState('Submit')
+
+  //array of guesses
+  const [guesses, setGuesses] = useState([])
+  const [accuracies, setAccuracies] = useState([])
   
 
   useEffect(() => {
@@ -51,7 +55,10 @@ const Play = () => {
         pathname: '/Results',
         state: {
           rounds: rounds,
-          points: points
+          points: points,
+          randGames: randGames,
+          guesses: guesses,
+          accuracies: accuracies
         }
       })
     }
@@ -67,8 +74,15 @@ const Play = () => {
     if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
       setPoints((pts) => pts+1)
 
+    //check accuracy
+    const newAccuracies = [...accuracies, 1-(Math.abs(guessYr-randGames[currentRound].year))/23]
+    setAccuracies(newAccuracies)
+
     if (currentRound === rounds-1)
       setGameOver(true)
+
+    const newGuesses = [...guesses, guessYr]
+    setGuesses(newGuesses)
 
     setSubmitLabel(() => hideElement ? 'Submit' : 'Next')
 

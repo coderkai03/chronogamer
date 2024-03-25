@@ -20,7 +20,6 @@ input[type="range"] {
   -webkit-appearance: none; /* Remove default styling for WebKit browsers */
   width: 100%; /* Set width to fill its container */
   background: #000; /* Set background color of the track */
-  outline: none; /* Remove default outline */
   position: relative; /* Position relative for absolute positioning of pseudo-elements */
   margin-top: 50px;
   margin-bottom: 50px;
@@ -136,7 +135,6 @@ input[type="range"]::-webkit-slider-runnable-track {
 .content-div h2 {
   font-size: 20px;
   font-weight: 500;
-  margin-bottom: 30px;
 }
 
 .content-div h3 {
@@ -147,7 +145,6 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .content-div input, .content-div textarea, .content-div select {
   width: 100%;
-  border: 1px solid #000;
   box-sizing: border-box;
   display: block;
   color: #000;
@@ -165,4 +162,26 @@ input[type="range"]::-webkit-slider-runnable-track {
   cursor: pointer;
   margin: 20px 0px;
   width: 100%;
+}
+
+.gameItem {
+  margin-bottom: 100px;
+}
+
+.yearResults {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.custom-range.input-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.totalScore {
+  align-self: center;
+  margin-bottom: 20px;
 }
