@@ -25,6 +25,7 @@ const Play = () => {
 
   //array of guesses
   const [guesses, setGuesses] = useState([])
+  const [accuracies, setAccuracies] = useState([])
   
 
   useEffect(() => {
@@ -56,7 +57,8 @@ const Play = () => {
           rounds: rounds,
           points: points,
           randGames: randGames,
-          guesses: guesses
+          guesses: guesses,
+          accuracies: accuracies
         }
       })
     }
@@ -71,6 +73,10 @@ const Play = () => {
 
     if (parseInt(guessYr) === parseInt(randGames[currentRound].year))
       setPoints((pts) => pts+1)
+
+    //check accuracy
+    const newAccuracies = [...accuracies, 1-(Math.abs(guessYr-randGames[currentRound].year))/23]
+    setAccuracies(newAccuracies)
 
     if (currentRound === rounds-1)
       setGameOver(true)

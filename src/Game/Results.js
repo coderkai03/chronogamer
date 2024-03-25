@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Game from "./Game";
+import { useEffect, useState } from "react";
+import { type } from "@testing-library/user-event/dist/type";
 
 const Results = () => {
     const location = useLocation()
@@ -8,6 +10,9 @@ const Results = () => {
     const finalPoints = location.state.points
     const randGames = location.state.randGames
     const userGuesses = location.state.guesses
+    const accuracies = location.state.accuracies
+
+    const [score, setScore] = useState(0)
 
     console.log('RESULTS ROUNDS: ', finalRounds)
     console.log('RESULTS POINTS: ', finalPoints)
@@ -43,12 +48,27 @@ const Results = () => {
     };
     
     
+    const calcScore = (array) => {
+        // Check if array is defined and not empty
+        if (Array.isArray(array) && array.length > 0) {
+            // If array is not empty, calculate the sum
+            return array.reduce((accumulator, currentValue) => accumulator + currentValue, 0)/accuracies.length;
+        } else {
+            // If array is undefined or empty, return 0 or any default value you prefer
+            return 0;
+        }
+    }
     
+
+    useEffect(() => {
+        setScore(calcScore(accuracies))
+    }, [])
     
 
     return (
         <div className="content-div">
             <h2>Results</h2>
+            <p className="totalScore">Total Score: {(score*100).toFixed(1)}%</p>
 
             <div className="gameResults">
                 {randGames && randGames.map((game, index) => (
@@ -62,6 +82,7 @@ const Results = () => {
                         />
                         <div className="yearResults">
                             <p style={{ color: changeColor(index) }}>Guess: {userGuesses[index]}</p>
+                            <p style={{ color: changeColor(index) }}>{(accuracies[index] * 100).toFixed(1)}%</p>
                             <p>Correct: {game.year}</p>
                         </div>
                         <input
