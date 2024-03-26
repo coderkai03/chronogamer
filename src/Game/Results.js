@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Game from "./Game";
 import { useEffect, useState } from "react";
-import { type } from "@testing-library/user-event/dist/type";
+import firebase from'firebase/auth'
 
 const Results = () => {
     const location = useLocation()
