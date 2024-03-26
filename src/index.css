@@ -16,6 +16,11 @@ img {
   width: 100%;
 }
 
+.accountSwitch {
+  font-size: 12px;
+  margin: 0;
+}
+
 input[type="range"] {
   -webkit-appearance: none; /* Remove default styling for WebKit browsers */
   width: 100%; /* Set width to fill its container */
@@ -155,6 +160,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 .content-div button {
   background: #ed5684;
+  font-size: 15px;
   color: #fff;
   border: 0;
   padding: 8px;
