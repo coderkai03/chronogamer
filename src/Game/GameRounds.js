@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useFetch from '../useFetch';
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
+import gameData from '../../data/gamesObject';
 
 
 
@@ -26,13 +27,14 @@ const GameRounds = () => {
 
     useEffect(() => {
         console.log("in useEffect")
-        async function fetchData(){
-          const res = await fetch(url)
-          return await res.json()
-        }
-        fetchData().then(data => {
-          setGames(data)
-        })
+        // async function fetchData(){
+        //   const res = await fetch(url)
+        //   return await res.json()
+        // }
+        // fetchData().then(data => {
+        //   setGames(data)
+        // })
+        setGames(gameData)
       }, [url])
 
     // console.log("Selected rounds:", rounds)
