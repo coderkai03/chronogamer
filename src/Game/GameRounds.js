@@ -34,7 +34,7 @@ const GameRounds = () => {
         // fetchData().then(data => {
         //   setGames(data)
         // })
-        setGames(gameData)
+        setGames(gameData.games)
       }, [url])
 
     // console.log("Selected rounds:", rounds)
