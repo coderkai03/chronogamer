@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useFetch from '../useFetch';
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
-import gameData from '../../data/gamesObject';
+import gameData from '../gamesObject';
 
 
 
