@@ -8,6 +8,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore, doc, collection, getDocs, query, where, setDoc } from 'firebase/firestore'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -21,6 +22,7 @@ const Home = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [username, setUsername] = useState('')
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -29,6 +31,9 @@ const Home = () => {
         try {
           const auth = getAuth();
           await signInWithEmailAndPassword(auth, email, password);
+
+          handleSubmit()
+
           // Redirect user to dashboard or home page upon successful sign-in
           history.push('/round-select');
         } catch (error) {
@@ -42,18 +47,39 @@ const Home = () => {
         e.preventDefault();
         setError(null);
     
-        try {
-            const auth = getAuth();
-            await createUserWithEmailAndPassword(auth, email, password);
-            // Redirect user to dashboard or home page upon successful sign-up
-            history.push('/round-select');
-        } catch (error) {
-            // Handle sign-up errors
-            setError(error.message);
-            window.alert(error)
+        if (username != '') {
+            try {
+                const auth = getAuth();
+                await createUserWithEmailAndPassword(auth, email, password);
+
+                handleSubmit()
+
+                // Redirect user to dashboard or home page upon successful sign-up
+                history.push('/round-select');
+            } catch (error) {
+                // Handle sign-up errors
+                setError(error.message);
+                window.alert(error)
+            }
         }
     }
     
+    const handleSubmit = async () => {
+        const user = getAuth().currentUser
+        const db = getFirestore()
+
+        if (user) {
+            // If user is signed in, get the UID
+            const userUid = user.uid;
+
+            const docRef = doc(db, 'users', userUid)
+            await setDoc(docRef, {username: username})
+
+            console.log('Data posted successfully!');
+        } else {
+            console.error('No user signed in');
+        }
+    }
 
     const switchLogin = () => {
         setIsLogin(!isLogin)
@@ -68,6 +94,9 @@ const Home = () => {
                     <form>
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                        
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
 
                         <label for="password">Password</label>
                         <input type="text" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>

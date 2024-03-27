@@ -2,8 +2,13 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Game from "./Game";
 import { useEffect, useState } from "react";
 import firebase from'firebase/auth'
+import { getFirestore, doc, collection, getDocs, query, where, setDoc } from 'firebase/firestore'
+import { getAuth } from "firebase/auth";
+
 
 const Results = () => {
+    const [userUid, setUserUid] = useState('')
+
     const location = useLocation()
 
     const finalRounds = location.state.rounds
@@ -52,23 +57,43 @@ const Results = () => {
         // Check if array is defined and not empty
         if (Array.isArray(array) && array.length > 0) {
             // If array is not empty, calculate the sum
-            return array.reduce((accumulator, currentValue) => accumulator + currentValue, 0)/accuracies.length;
+            return (100*(array.reduce((accumulator, currentValue) => accumulator + currentValue, 0)/accuracies.length)).toFixed(1);
         } else {
             // If array is undefined or empty, return 0 or any default value you prefer
             return 0;
         }
     }
     
+    const [userData, setUserData] = useState({
+        accuracy: 0,
+    })
 
     useEffect(() => {
-        setScore(calcScore(accuracies))
+        handleSubmit()
     }, [])
+
+    const handleSubmit = async () => {
+        const user = getAuth().currentUser
+        const db = getFirestore()
+
+        if (user) {
+            // If user is signed in, get the UID
+            const userUid = user.uid;
+
+            const docRef = doc(db, 'users', userUid)
+            await setDoc(docRef, {accuracy: calcScore(accuracies)})
+
+            console.log('Data posted successfully!');
+        } else {
+            console.error('No user signed in');
+        }
+    }
     
 
     return (
         <div className="content-div">
             <h2>Results</h2>
-            <p className="totalScore">Total Score: {(score*100).toFixed(1)}%</p>
+            <p className="totalScore">Total Score: {calcScore(accuracies)}%</p>
 
             <div className="gameResults">
                 {randGames && randGames.map((game, index) => (

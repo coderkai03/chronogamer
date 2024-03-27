@@ -1,34 +1,38 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Profile from "./Profile";
-import useFetch from "../useFetch";
+import { getFirestore, collection, getDocs } from 'firebase/firestore'
 
 const Leaderboard = () => {
-    const url = 'http://localhost:8001/profiles'
-    const [PFList, setPFList] = useState([])
+    const [data, setData] = useState([])
 
     useEffect(() => {
-        async function fetchData(){
-          const res = await fetch(url)
-          return await res.json()
+      const fetchData = async () => {
+        try {
+            const db = getFirestore();
+            const querySnapshot = await getDocs(collection(db, 'users'));
+            const dataArray = querySnapshot.docs.map(doc => doc.data());
+            dataArray.sort((a, b) => b.accuracy - a.accuracy)
+            setData(dataArray);
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-        fetchData().then(data => {
-          setPFList(data)
-        })
-        
-      }, [url])
+    };
+
+    fetchData();
+      }, [])
       
-      console.log("Profiles: ", PFList)
 
     return (
         <div>
             <h1>LEADERBOARD</h1>
-            {PFList && PFList
-                .map((pf) => (
-                    <div key={pf.id}>
-                        <Profile name={pf.name} record={pf.games_won} percent={pf.accuracy}/>
-                    </div>
-                ))}
+            {data && data.map((item, index) => (
+              <div className="content-div" key={index} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                {console.log('Document:', item.accuracy)}
+                <h2>{item.username}</h2>
+                {item && <h2>Score: {item.accuracy}%</h2>}
+              </div>
+            ))}
         </div>
     );
 }
