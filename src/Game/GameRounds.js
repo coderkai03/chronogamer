@@ -3,7 +3,7 @@ import useFetch from '../useFetch';
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import gameData from '../gamesObject';
-
+import AllGames from '../gamesObject';
 
 
 // const api = axios.create({
@@ -34,7 +34,7 @@ const GameRounds = () => {
         // fetchData().then(data => {
         //   setGames(data)
         // })
-        setGames(gameData.games)
+        setGames(AllGames.gameData['games'])
       }, [url])
 
     // console.log("Selected rounds:", rounds)
