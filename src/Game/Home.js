@@ -1,11 +1,9 @@
 import { useState } from "react";
-import GameRounds from './GameRounds'
-import useFetch from "../useFetch";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-import firebaseConfig from '../firebase/firebaseConfig'; // Import the Firebase configuration
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import firebaseConfig from '../firebase/firebaseConfig' // Import the Firebase configuration
 // Import the functions you need from the SDKs you need
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, collection, getDocs, query, where, setDoc } from 'firebase/firestore'
@@ -47,7 +45,7 @@ const Home = () => {
         e.preventDefault();
         setError(null);
     
-        if (username != '') {
+        if (username != null) {
             try {
                 const auth = getAuth();
                 await createUserWithEmailAndPassword(auth, email, password);
@@ -62,6 +60,9 @@ const Home = () => {
                 window.alert(error)
             }
         }
+        else {
+            window.alert("Error: Please input username")
+        }
     }
     
     const handleSubmit = async () => {
@@ -69,13 +70,7 @@ const Home = () => {
         const db = getFirestore()
 
         if (user) {
-            // If user is signed in, get the UID
-            const userUid = user.uid;
-
-            const docRef = doc(db, 'users', userUid)
-            await setDoc(docRef, {username: username})
-
-            console.log('Data posted successfully!');
+            console.log('Login successful!');
         } else {
             console.error('No user signed in');
         }
@@ -95,11 +90,11 @@ const Home = () => {
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                         
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                        {!isLogin && <label for="username">Username</label>}
+                        {!isLogin && <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>}
 
                         <label for="password">Password</label>
-                        <input type="text" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                        <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
 
                         {isLogin && <button onClick={handleLogin}>LOG IN</button>}
                         {isLogin && <p className="accountSwitch" onClick={switchLogin}><u>SIGN UP</u></p>}
